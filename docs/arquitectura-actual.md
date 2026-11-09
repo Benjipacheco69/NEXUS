@@ -1,98 +1,37 @@
-# Arquitectura Actual de NEXUS
+# Arquitectura actual de NEXUS v2.0
 
-## Descripción general
+NEXUS es una aplicación de consola en C#. Las clases están agrupadas físicamente en `POO Nexus/Program.cs`; los comentarios internos indican las secciones lógicas.
 
-La versión actual de NEXUS fue desarrollada como una aplicación de consola en C#. El sistema permite registrar un explorador, explorar realidades, administrar energía y estabilidad, encontrar pistas y visualizar un mapa.
+| Clase | Responsabilidad |
+|---|---|
+| Program | Punto de entrada; instancia Juego e inicia la partida. |
+| Personaje | Clase abstracta con nombre, energía, ataque y comportamiento común. |
+| Cadete | Jugador; administra estabilidad, XP, escudo, exploración e inventario. |
+| Enemigo | Entidad que contraataca y entrega 20 XP al ser derrotada. |
+| Robot | Entidad cuya defensa reduce a la mitad el daño recibido; entrega 30 XP. |
+| TipoObjeto / Objeto | Categorías y características de los objetos. |
+| Inventario | Lista de objetos con capacidad máxima de ocho. |
+| Mapa | Cuadrícula, posición, movimientos y zonas especiales. |
+| Mision | Objetivos, progreso y recompensa. |
+| Juego | Coordina menú, exploración, eventos, encuentros y finalización. |
 
-Toda la lógica se encuentra dentro de una única clase llamada Program.
+## Relaciones y POO
+- Cadete, Enemigo y Robot heredan de Personaje.
+- Cadete contiene un Inventario; este mantiene objetos Objeto.
+- Juego coordina Cadete, Mapa, Mision y una entidad activa Personaje.
+- Abstracción: Personaje es abstracta.
+- Encapsulamiento: atributos privados y métodos públicos.
+- Herencia: especialización de Personaje.
+- Polimorfismo: sobrescritura de RecibirDano, AlAparecer, Reaccionar, GetRecompensaXP y MostrarInformacion.
+- Composición: Cadete contiene Inventario.
 
-## Estructura actual
+## Flujo
+~~~text
+Program.Main -> Juego.Iniciar -> CrearCadete y validar
+ -> crear Mapa y Mision -> entregar objetos iniciales
+ -> ciclo de menú -> ProcesarOpcion -> acciones/eventos/combate
+ -> comprobar resultado y finalizar
+~~~
 
-Program
-
-- Main()
-- InicializarMapa()
-- ExplorarMapa()
-- MostrarMapa()
-- MostrarEstado()
-- DibujarBarra()
-
-## Funcionalidades implementadas
-
-### Registro del explorador
-
-Solicita:
-
-- Nombre
-- Edad
-- Energía inicial
-- Estabilidad inicial
-
-### Exploración
-
-- Incrementa profundidad.
-- Consume energía.
-- Reduce estabilidad.
-- Actualiza el mapa.
-
-### Análisis de anomalías
-
-- Consume energía.
-- Obtiene pistas de IRIS.
-
-### Recuperación de energía
-
-- Restaura energía hasta un máximo de 100.
-
-### Mapa
-
-Se implementa mediante una matriz bidimensional de caracteres:
-
-char[,]
-
-Tamaño actual:
-
-3x3
-
-### Estado del jugador
-
-Muestra:
-
-- Nombre
-- Edad
-- Energía
-- Estabilidad
-- Profundidad
-- Pistas obtenidas
-
-## Limitaciones actuales
-
-### Arquitectura monolítica
-
-Toda la lógica está concentrada en Program.
-
-### Ausencia de clases especializadas
-
-No existen clases para:
-
-- Jugador
-- Inventario
-- Misión
-- Partida
-- Anomalía
-
-### Sin persistencia
-
-No existe:
-
-- Base de datos.
-- Guardado de partidas.
-- Recuperación de progreso.
-
-### Interfaz limitada
-
-La interacción ocurre exclusivamente por consola.
-
-## Conclusión
-
-La versión H3 demuestra el funcionamiento básico del juego pero requiere una reorganización para soportar una interfaz gráfica y nuevas funcionalidades.
+## Limitaciones
+Las clases están en un solo archivo; Juego combina consola y coordinación; la entrada valida formato numérico pero no todos los rangos; el progreso no se guarda al cerrar; no se incluyen pruebas automatizadas.

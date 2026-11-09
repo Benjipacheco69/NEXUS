@@ -140,7 +140,7 @@ Al iniciar un encuentro:
 Al finalizar:
 - Si la entidad es derrotada, otorgar XP según su tipo.
 - Si era el Guardián, marcar el tercer objetivo de la misión.
-- Si se escapa con éxito, terminar el encuentro sin marcar como derrotado al Guardián; por tanto, la misión no puede completarse todavía.
+- Si se escapa con éxito del encuentro con el Guardián, la lógica actual de Juego.TerminarEncuentro marca el objetivo de sobrevivir al encuentro como cumplido. La misión aún exige regresar al punto de extracción.
 - Si el intento de escape falla, la entidad reacciona.
 - Actualizar estado y persistir.
 

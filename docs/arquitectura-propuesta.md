@@ -1,38 +1,110 @@
-# Arquitectura propuesta para NEXUS
+# Arquitectura Propuesta
 
-Esta es una propuesta futura; no representa la organización implementada actualmente.
+## Objetivo
 
-~~~text
-POO Nexus/
-├── Program.cs
-├── POO Nexus.csproj
-├── Dominio/
-│   ├── Personaje.cs
-│   ├── Cadete.cs
-│   ├── Enemigo.cs
-│   ├── Robot.cs
-│   ├── Objeto.cs
-│   ├── Inventario.cs
-│   ├── Mapa.cs
-│   └── Mision.cs
-├── Aplicacion/
-│   └── Juego.cs
-└── Presentacion/
-    └── MenuConsola.cs
-~~~
+Evolucionar NEXUS hacia una aplicación gráfica utilizando Windows Forms y SQL Server mediante una arquitectura organizada en capas.
 
-| Capa | Responsabilidad |
-|---|---|
-| Presentación | Menús, entradas y mensajes. |
-| Aplicación | Coordinación del ciclo y casos de uso. |
-| Dominio | Personajes, objetos, inventario, mapa y misión. |
+## Diagrama de arquitectura
 
-## Mejoras
-1. Separar las clases en archivos sin alterar las reglas.
-2. Desacoplar la consola de la lógica de juego.
-3. Validar rangos de edad, energía, estabilidad y opciones.
-4. Hacer configurable el generador aleatorio para pruebas.
-5. Añadir pruebas unitarias de movimiento, inventario, daño y misión.
-6. Diseñar guardado de partidas solo si se requiere persistencia.
+Windows Forms (Interfaz)
 
-Implementar por etapas: modularización, compilación y pruebas de regresión, extracción de presentación y servicios, pruebas automatizadas.
+↓
+
+Lógica del Juego
+
+↓
+
+Acceso a Datos
+
+↓
+
+SQL Server
+
+## Capa de presentación
+
+Responsabilidades:
+
+- Mostrar pantallas.
+- Mostrar estadísticas.
+- Mostrar inventario.
+- Mostrar misiones.
+- Mostrar mapa interactivo.
+
+Formularios propuestos:
+
+- FrmMenuPrincipal
+- FrmExploracion
+- FrmInventario
+- FrmMisiones
+- FrmEstadisticas
+
+## Capa de lógica
+
+Responsable de las reglas del juego.
+
+### Clase Jugador
+
+Atributos:
+
+- Nombre
+- Edad
+- Energía
+- Estabilidad
+- Nivel
+- Experiencia
+
+### Clase Inventario
+
+Gestiona objetos obtenidos.
+
+### Clase Mision
+
+Gestiona objetivos y recompensas.
+
+### Clase Mapa
+
+Controla sectores y exploración.
+
+### Clase Partida
+
+Gestiona el progreso general.
+
+### Clase Anomalia
+
+Representa eventos especiales.
+
+## Capa de acceso a datos
+
+Responsable de:
+
+- Guardar partidas.
+- Cargar partidas.
+- Consultar progreso.
+- Consultar inventario.
+
+Clase principal:
+
+- ConexionBD
+
+## Ventajas
+
+### Mantenibilidad
+
+Cada componente tendrá una función específica.
+
+### Escalabilidad
+
+Permitirá agregar:
+
+- Nuevas misiones.
+- Nuevos mapas.
+- Nuevos objetos.
+- Logros.
+
+### Reutilización
+
+La lógica del juego podrá utilizarse en futuras versiones.
+
+## Conclusión
+
+La arquitectura por capas mejora la organización del proyecto y facilita futuras expansiones.

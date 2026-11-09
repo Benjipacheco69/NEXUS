@@ -399,3 +399,15 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Local configuration and secrets for future SQL Server connection
+appsettings.Local.json
+appsettings.Development.json
+secrets.json
+.env
+.env.*
+!.env.example
+
+# Local database exports and backups
+*.bak
+*.bacpac

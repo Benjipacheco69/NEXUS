@@ -1,36 +1,57 @@
 # NEXUS
 
-**NEXUS** es un videojuego de exploración y supervivencia desarrollado en C# como proyecto académico de Programación Orientada a Objetos (POO). La historia se desarrolla en el año 2297: un cadete debe explorar una realidad desconocida, investigar una anomalía, enfrentarse a entidades y regresar al punto de extracción.
+**NEXUS** es un videojuego de exploración, supervivencia y combate desarrollado en C# como proyecto académico de Programación Orientada a Objetos. La versión H3/v2.0 es una aplicación de consola funcional que sirve como base para su evolución a una aplicación de escritorio con **Windows Forms y SQL Server**.
 
-## Objetivo del proyecto
+La evolución debe conservar la identidad, los personajes, las reglas y la misión principal del juego existente. La interfaz gráfica y la persistencia en base de datos son objetivos de las siguientes etapas; todavía no forman parte de la versión de consola incluida en este repositorio.
 
-Aplicar conceptos de programación orientada a objetos mediante un juego interactivo ejecutado en consola, con mecánicas de exploración, administración de recursos, inventario, combate y cumplimiento de una misión.
+## Estado del proyecto
 
-## Funcionalidades implementadas
+| Componente | Estado |
+|---|---|
+| Juego de consola en C# | Implementado en el código actual |
+| Mapa 3 × 3, exploración y eventos | Implementado |
+| Cadete, inventario, objetos y combate | Implementado |
+| Misión principal y extracción | Implementado |
+| Interfaz Windows Forms | Propuesta para la siguiente etapa |
+| Persistencia SQL Server | Propuesta para la siguiente etapa |
+| Guardar y continuar partidas | Pendiente de implementación |
+ 
+## Funcionalidades implementadas en H3/v2.0
 
-- **Creación del cadete:** ingreso de nombre, edad, energía y estabilidad inicial.
-- **Exploración:** desplazamiento por un mapa de 3 × 3 mediante norte, sur, este y oeste.
-- **Gestión de recursos:** control de energía, estabilidad, escudo, ataque y experiencia (XP).
-- **Eventos aleatorios:** hallazgo de objetos, aparición de enemigos o robots, distorsiones de realidad, pérdida de recursos y pistas de IRIS.
-- **Inventario:** capacidad máxima de ocho objetos; permite consultar y utilizar células de energía, escudos, módulos de ataque y analizadores.
-- **Combate:** enfrentamientos contra criaturas, robots y el guardián de la anomalía. Cada tipo de entidad tiene comportamientos propios.
-- **Análisis:** consulta de información de las entidades cuando se dispone de un analizador.
-- **Misión principal:** llegar a la anomalía, encontrar el núcleo energético, sobrevivir al encuentro con la entidad y regresar al punto de extracción.
-- **Menú de juego:** opciones para moverse, analizar, descansar, consultar estado, mapa, inventario, atacar, escapar, revisar la misión y salir.
+- **Creación del cadete:** nombre, edad, energía y estabilidad iniciales. La inmersión exige edad mínima de 18 años, energía mínima de 30 y estabilidad mínima de 40; los recursos se limitan a un máximo de 100.
+- **Exploración:** desplazamiento por un mapa de 3 × 3 mediante norte, sur, este y oeste. Cada movimiento válido consume 5 puntos de energía y 2 de estabilidad.
+- **Gestión del personaje:** energía, estabilidad, ataque, escudo, experiencia, zonas exploradas y pistas de IRIS.
+- **Eventos aleatorios:** objetos, enemigos, robots, distorsiones, pérdidas de recursos, registros de IRIS o zonas sin eventos.
+- **Inventario:** capacidad máxima de ocho objetos. Incluye células de energía, escudos, módulos de ataque y analizadores.
+- **Combate:** enfrentamientos contra criaturas, robots y el Guardián de la anomalía. Los enemigos y robots tienen comportamientos distintos.
+- **Análisis:** analizar anomalías consume 8 puntos de energía y permite obtener hasta tres pistas de IRIS. Para analizar entidades se necesita un analizador.
+- **Misión principal:** llegar a la anomalía situada en la esquina opuesta del mapa, encontrar el núcleo, sobrevivir al Guardián y regresar al punto de extracción.
+- **Menú de juego:** movimiento, análisis, descanso, estado, mapa, inventario, uso de objetos, ataque, escape, análisis de entidad, misión y salida.
 
-## Tecnologías y requisitos
+## Tecnologías de la versión actual
 
-- **Lenguaje:** C#.
-- **Plataforma:** .NET 10 (`net10.0`).
-- **Tipo de aplicación:** consola.
-- **Entorno recomendado:** Visual Studio Community con el SDK de .NET 10 instalado.
-- **Control de versiones:** Git y GitHub.
+- Lenguaje: C#.
+- Plataforma: .NET 10 (net10.0).
+- Tipo de aplicación actual: consola.
+- Entorno recomendado: Visual Studio Community con SDK de .NET 10.
+- Control de versiones: Git y GitHub.
 
-El proyecto no requiere una base de datos ni conexión a Internet para ejecutar sus mecánicas principales. No incluye interfaz gráfica ni almacenamiento persistente de partidas.
+La versión actual no utiliza SQL Server, no contiene formularios Windows Forms y no guarda partidas de forma persistente.
+
+## Arquitectura objetivo
+
+La siguiente etapa transformará el juego en una aplicación de escritorio Windows Forms, manteniendo las reglas de NEXUS y separando responsabilidades:
+
+1. **Presentación:** formularios, botones, mapa visual, barras de recursos y mensajes.
+2. **Lógica del juego:** reglas de exploración, combate, inventario, misión y estado del cadete.
+3. **Acceso a datos:** repositorios C# para guardar y recuperar partidas.
+4. **Persistencia:** SQL Server para jugadores, partidas, mapa, objetivos, encuentros e inventario.
+
+La propuesta detallada, el flujo de interacción y el plan de migración se encuentran en la carpeta docs/.
 
 ## Estructura del repositorio
 
-```text
+~~~text
 NEXUS/
 ├── README.md
 ├── .gitignore
@@ -44,49 +65,50 @@ NEXUS/
     ├── arquitectura-propuesta.md
     ├── modelo-de-datos-propuesto.md
     ├── analisis-tecnico.md
+    ├── implementacion/
+    │   └── guia-interaccion-winform.md
+    ├── sql/
+    │   └── nexus-schema.sql
     └── evidencias/
-```
+        ├── README.md
+        ├── diagrama-clases.md
+        └── flujo-principal.md
+~~~
 
-> La carpeta `docs/` contiene la documentación del proyecto. Consulta los archivos existentes directamente en esa carpeta para revisar el diseño, análisis, propuestas y evidencias.
-
-## Cómo ejecutar el proyecto
+## Cómo ejecutar la versión actual
 
 ### Requisitos previos
 
-1. Instalar el **SDK de .NET 10**.
-2. Descargar o clonar este repositorio.
+1. Instalar el SDK de .NET 10.
+2. Clonar o descargar este repositorio.
 3. Abrir una terminal en la carpeta raíz del repositorio.
 
-### Ejecución desde la terminal
+### Comandos
 
-Ejecuta los siguientes comandos en orden:
-
-```bash
+~~~bash
 dotnet restore "POO Nexus/POO Nexus.csproj"
 dotnet build "POO Nexus/POO Nexus.csproj"
 dotnet run --project "POO Nexus/POO Nexus.csproj"
-```
+~~~
 
-También puedes abrir el archivo `POO Nexus.slnx` con una versión compatible de Visual Studio, establecer el proyecto **POO Nexus** como proyecto de inicio y ejecutar con **F5**.
+También se puede abrir POO Nexus.slnx con una versión compatible de Visual Studio, seleccionar el proyecto POO Nexus y ejecutar con F5.
 
-## Conceptos de programación orientada a objetos
+## Programación orientada a objetos
 
-El código organiza las responsabilidades en clases como `Juego`, `Personaje`, `Cadete`, `Enemigo`, `Robot`, `Inventario`, `Objeto`, `Mapa` y `Mision`.
+El código actual contiene las clases Juego, Personaje, Cadete, Enemigo, Robot, Objeto, Inventario, Mapa y Mision.
 
-- **Abstracción:** la clase base abstracta `Personaje` define características y comportamientos comunes.
-- **Encapsulamiento:** los atributos se mantienen privados y se accede a ellos mediante métodos.
-- **Herencia:** `Cadete`, `Enemigo` y `Robot` derivan de `Personaje`.
+- **Abstracción:** Personaje es una clase abstracta con características y comportamientos comunes.
+- **Encapsulamiento:** los atributos se mantienen privados y se manipulan mediante métodos.
+- **Herencia:** Cadete, Enemigo y Robot derivan de Personaje.
 - **Polimorfismo:** las entidades redefinen comportamientos como recibir daño, reaccionar y mostrar información.
-- **Composición:** `Cadete` utiliza un inventario y `Juego` coordina los objetos principales de la partida.
+- **Composición:** Cadete contiene un Inventario y Juego coordina los objetos de la partida.
 
-## Estado y alcance
+Las clases están agrupadas actualmente en Program.cs. La guía de migración propone separarlas en archivos sin alterar sus reglas de juego.
 
-Este repositorio contiene el código fuente y los archivos de proyecto necesarios para restaurar, compilar y ejecutar la aplicación. Los comandos anteriores describen el procedimiento de ejecución; la compilación y las pruebas deben realizarse en un entorno que tenga instalado el SDK de .NET 10.
+## Alcance y próximos pasos
 
-## Control de versiones
-
-Los cambios del proyecto se registran en Git mediante commits descriptivos. El archivo `.gitignore` excluye archivos temporales y resultados de compilación de Visual Studio y .NET, como las carpetas `bin/`, `obj/` y `.vs/`.
+La documentación describe el estado real del prototipo y especifica la solución futura. La interfaz Windows Forms, la conexión a SQL Server, el guardado/carga y las pruebas de integración deberán implementarse y verificarse en las siguientes etapas. No se consideran funcionalidades terminadas hasta que exista código ejecutable y evidencia de pruebas.
 
 ## Autoría
 
-Proyecto académico **NEXUS** — Programación Orientada a Objetos.
+Proyecto académico NEXUS — Programación Orientada a Objetos.

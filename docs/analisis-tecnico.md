@@ -1,123 +1,50 @@
-# Análisis Técnico
+# Análisis técnico de NEXUS v2.0
 
-## Objetivo
+## Identificación
+- Lenguaje: C#.
+- Tipo: aplicación de consola.
+- Framework objetivo: .NET 10 (`net10.0`).
+- Proyecto: `POO Nexus/POO Nexus.csproj`.
+- Código: `POO Nexus/Program.cs`.
 
-Analizar tecnologías y justificar las decisiones adoptadas para la evolución de NEXUS.
+## Funcionalidades
+Creación y validación del cadete, mapa 3 × 3, movimiento, eventos aleatorios, pistas IRIS, objetos, inventario, combate, experiencia y misión de cuatro objetivos.
 
-## Alternativas evaluadas
+## Fortalezas
+- Aplica abstracción, encapsulamiento, herencia y polimorfismo.
+- Modela entidades mediante clases.
+- Limita inventario y movimientos fuera del mapa.
+- Usa int.TryParse para entradas numéricas.
+- Separa mapa y misión en clases propias.
 
-### Aplicación de consola
+## Aspectos por mejorar
+| Aspecto | Observación | Recomendación |
+|---|---|---|
+| Organización | Clases en un archivo. | Separar archivos. |
+| Validación | No todos los rangos están controlados. | Validar límites y repetir solicitudes. |
+| Estabilidad | Algunos eventos pueden reducirla sin límite superior/inferior centralizado. | Centralizar reglas de recursos. |
+| Aleatoriedad | Eventos dependen de Random. | Permitir semilla configurable en pruebas. |
+| Persistencia | No se guardan partidas. | Diseñar guardado si se requiere. |
+| Pruebas | No hay pruebas automatizadas incluidas. | Crear proyecto de pruebas. |
 
-Ventajas:
+## Pruebas recomendadas
+1. Rechazo por edad menor de 18, energía menor de 30 o estabilidad menor de 40.
+2. Ajuste de valores iniciales superiores a 100.
+3. Movimientos fuera de límites.
+4. Coste de energía y estabilidad por movimiento.
+5. Capacidad máxima del inventario.
+6. Recuperación de energía y uso de escudo.
+7. Reducción de daño del robot.
+8. Recompensas XP.
+9. Cumplimiento de objetivos y regreso a extracción.
+10. Fin por energía cero, estabilidad cero y salida voluntaria.
 
-- Fácil implementación.
-- Menor complejidad.
-- Consumo reducido de recursos.
+## Ejecución
+Se requiere SDK .NET 10:
+~~~bash
+dotnet restore "POO Nexus/POO Nexus.csproj"
+dotnet build "POO Nexus/POO Nexus.csproj"
+dotnet run --project "POO Nexus/POO Nexus.csproj"
+~~~
 
-Desventajas:
-
-- Interfaz limitada.
-- Menor atractivo visual.
-- Difícil expansión.
-
----
-
-### Windows Forms
-
-Ventajas:
-
-- Integración directa con C#.
-- Desarrollo rápido.
-- Compatible con SQL Server.
-- Ideal para proyectos académicos.
-
-Desventajas:
-
-- Capacidades gráficas limitadas frente a motores especializados.
-
----
-
-### Unity
-
-Ventajas:
-
-- Motor profesional.
-- Soporte para 2D y 3D.
-- Alta escalabilidad.
-
-Desventajas:
-
-- Mayor complejidad.
-- Curva de aprendizaje más elevada.
-
-## Alternativas de almacenamiento
-
-### Archivos de texto
-
-Ventajas:
-
-- Fácil implementación.
-
-Desventajas:
-
-- Poco escalables.
-- Organización limitada.
-
-### SQL Server
-
-Ventajas:
-
-- Almacenamiento estructurado.
-- Seguridad.
-- Consultas eficientes.
-- Compatibilidad con .NET.
-
-Desventajas:
-
-- Requiere configuración inicial.
-
-## Decisiones recomendadas
-
-### Interfaz gráfica
-
-Se recomienda Windows Forms porque:
-
-- Ya se utiliza C#.
-- Permite reutilizar el código existente.
-- Cumple con los objetivos académicos del proyecto.
-
-### Persistencia
-
-Se recomienda SQL Server porque:
-
-- Permite guardar progreso.
-- Facilita las consultas.
-- Soporta crecimiento futuro.
-
-### Arquitectura
-
-Se recomienda arquitectura en capas separando:
-
-- Presentación.
-- Lógica del juego.
-- Acceso a datos.
-
-## Fuentes técnicas
-
-- Microsoft Learn C#
-- Microsoft Learn Windows Forms
-- Microsoft Learn SQL Server
-- Documentación oficial .NET
-
-## Verificación mediante IA
-
-La propuesta fue contrastada mediante herramientas de inteligencia artificial para validar:
-
-- Arquitectura por capas.
-- Diseño de base de datos.
-- Buenas prácticas de programación orientada a objetos.
-- Escalabilidad del sistema.
-
-## Conclusión
-
-La combinación de Windows Forms, SQL Server y arquitectura en capas representa la opción más adecuada para evolucionar NEXUS desde un prototipo de consola hacia un videojuego gráfico mantenible, escalable y alineado con los objetivos del proyecto.
+Prioridades: modularizar, reforzar validaciones y automatizar pruebas. La persistencia y la interfaz gráfica son mejoras futuras.

@@ -1,26 +1,102 @@
-# Modelo de datos propuesto para NEXUS
+# Modelo de Datos Propuesto
 
-## Modelo actual
-NEXUS v2.0 no utiliza base de datos. Los datos se mantienen en memoria mediante objetos, listas y arreglos.
+## Objetivo
 
-| Elemento | Datos principales | Relación |
-|---|---|---|
-| Personaje | nombre, energía, ataque | Base de Cadete, Enemigo y Robot. |
-| Cadete | edad, estabilidad, XP, escudo, zonas, pistas | Contiene Inventario. |
-| Objeto | nombre, tipo, valor | Se almacena en Inventario. |
-| Inventario | lista y capacidad | Pertenece al Cadete. |
-| Mapa | matriz, fila, columna | Coordinado por Juego. |
-| Mision | nombre, objetivos, estados, recompensa | Coordinada por Juego. |
+Permitir almacenar el progreso del jugador utilizando SQL Server.
 
-~~~text
-Personaje (abstracto)
- ├── Cadete ── Inventario ── Objeto
- ├── Enemigo
- └── Robot
-Juego ── Cadete / Mapa / Mision / entidad actual
-~~~
+## Tabla Jugador
 
-## Persistencia futura (no implementada)
-Podrían crearse entidades Partida, CadeteGuardado, ObjetoCatalogo, InventarioPartida, EstadoMapa, MisionPartida y ObjetivoPartida. Las claves y restricciones dependerán del motor elegido.
+| Campo | Tipo |
+|---------|---------|
+| IdJugador | INT |
+| Nombre | VARCHAR(50) |
+| Edad | INT |
+| Energia | INT |
+| Estabilidad | INT |
+| Nivel | INT |
+| Experiencia | INT |
 
-No existen tablas SQL, ORM ni guardado de partidas en la versión actual.
+## Tabla Partida
+
+| Campo | Tipo |
+|---------|---------|
+| IdPartida | INT |
+| IdJugador | INT |
+| FechaGuardado | DATETIME |
+| Profundidad | INT |
+
+## Tabla Mision
+
+| Campo | Tipo |
+|---------|---------|
+| IdMision | INT |
+| Nombre | VARCHAR(100) |
+| Descripcion | VARCHAR(200) |
+| Recompensa | VARCHAR(100) |
+
+## Tabla ProgresoMision
+
+| Campo | Tipo |
+|---------|---------|
+| IdProgreso | INT |
+| IdJugador | INT |
+| IdMision | INT |
+| Estado | VARCHAR(20) |
+
+## Tabla Item
+
+| Campo | Tipo |
+|---------|---------|
+| IdItem | INT |
+| Nombre | VARCHAR(100) |
+| Tipo | VARCHAR(50) |
+| Descripcion | VARCHAR(200) |
+
+## Tabla Inventario
+
+| Campo | Tipo |
+|---------|---------|
+| IdInventario | INT |
+| IdJugador | INT |
+| IdItem | INT |
+| Cantidad | INT |
+
+## Tabla Anomalia
+
+| Campo | Tipo |
+|---------|---------|
+| IdAnomalia | INT |
+| Nombre | VARCHAR(100) |
+| Tipo | VARCHAR(50) |
+| Efecto | VARCHAR(100) |
+
+## Relaciones
+
+Jugador
+
+- Tiene partidas
+- Tiene inventario
+- Tiene progreso de misiones
+
+Inventario
+
+- Contiene Items
+
+ProgresoMision
+
+- Referencia Misiones
+
+## Estrategia de persistencia
+
+SQL Server almacenará:
+
+- Jugadores.
+- Inventario.
+- Misiones.
+- Estadísticas.
+- Profundidad.
+- Progreso general.
+
+## Conclusión
+
+El modelo propuesto permite crecer sin modificar significativamente la estructura de la base de datos.

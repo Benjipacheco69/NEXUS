@@ -75,6 +75,17 @@ NEXUS/
         └── flujo-principal.md
 ~~~
 
+## Documentación del proyecto
+
+- [Diseño del videojuego](docs/diseno-del-juego.md): reglas reales, misión, mecánicas y experiencia prevista.
+- [Arquitectura actual](docs/arquitectura-actual.md): clases y funcionamiento de la versión H3/v2.0.
+- [Arquitectura propuesta](docs/arquitectura-propuesta.md): evolución a Windows Forms y SQL Server.
+- [Modelo de datos](docs/modelo-de-datos-propuesto.md): entidades, relaciones y persistencia.
+- [Análisis técnico](docs/analisis-tecnico.md): justificación de tecnologías y riesgos.
+- [Guía de interacción Windows Forms](docs/implementacion/guia-interaccion-winform.md): pantallas, controles, acciones y pruebas de aceptación.
+- [Esquema SQL Server](docs/sql/nexus-schema.sql): script inicial de creación de base de datos.
+- [Evidencias y diagramas](docs/evidencias/README.md): diagramas y lista de capturas reales pendientes.
+
 ## Cómo ejecutar la versión actual
 
 ### Requisitos previos

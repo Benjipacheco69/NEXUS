@@ -1,0 +1,26 @@
+# Registro de pruebas – NEXUS
+
+## 1. Objetivo
+Documentar las pruebas funcionales realizadas en el videojuego NEXUS para comprobar su funcionamiento y validar los datos de entrada.
+
+## 2. Pruebas realizadas
+
+| Prueba | Datos o acción | Resultado |
+|---|---|---|
+| Validación de edad | Ingresar edad de 15 años | Rechazo de datos |
+| Validación de energía | Ingresar energía de 20 | Rechazo de datos |
+| Validación de estabilidad | Ingresar estabilidad de 20 | Rechazo de datos |
+| Inicio de partida | Ingresar datos válidos | Inicio correcto |
+| Movimiento | Desplazar al personaje | Funcionamiento comprobado |
+| Límites del mapa | Intentar salir del área permitida | Movimiento restringido |
+
+## 3. Resultado general
+Las pruebas realizadas permitieron comprobar las validaciones iniciales del jugador y el funcionamiento del movimiento dentro del mapa.
+
+## 4. Limitaciones
+- No se implementó persistencia mediante SQL Server.
+- No se realizaron pruebas de conexión a bases de datos.
+- La publicación en GitHub Releases quedó pendiente.
+
+## 5. Conclusión
+NEXUS cuenta con funcionalidades probadas de inicio, validación de datos y movimiento. Se identifican como trabajos pendientes la persistencia de partidas y la publicación oficial del ejecutable.
